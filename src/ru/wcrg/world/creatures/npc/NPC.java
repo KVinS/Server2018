@@ -7,6 +7,7 @@ import ru.wcrg.world.GameWorld;
 import ru.wcrg.world.creatures.Animal;
 import ru.wcrg.world.creatures.messages.MessageMoveTo;
 import ru.wcrg.world.creatures.messages.MessageRegisterNPC;
+import ru.wcrg.world.creatures.messages.MessageSetImpuls;
 import ru.wcrg.world.creatures.messages.MessageToAIService;
 import ru.wcrg.world.gameLogic.GameLogicService;
 import ru.wcrg.world.gameLogic.messages.MessageAttack;
@@ -42,10 +43,11 @@ public class NPC extends Animal {
             }
         }
 
-        int x = Random.Range(0,200);
-        int z = Random.Range(0,100);
+        int x = Random.Range(-2,2);
+        int z = Random.Range(-2,2);
 
-        getMessageSystem().sendMessage(new MessageMoveTo(this.getAddress(), this.getAddress(), x, 0, z));
+        //getMessageSystem().sendMessage(new MessageMoveTo(this.getAddress(), this.getAddress(), x, 0, z));
+        getMessageSystem().sendMessage(new MessageSetImpuls(this.getAddress(), this.getAddress(), x, 0, z));
     }
 
     @Override

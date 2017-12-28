@@ -16,6 +16,7 @@ public class WorldObject {
     private Fraction fraction;
 
     protected int x, y, z;
+    protected int impX, impY, impZ;
 
     public WorldObject(String title, GameWorld gameWorld, Fraction fraction, int x, int y, int z) {
         this.title = title;
@@ -24,6 +25,9 @@ public class WorldObject {
         this.x = x;
         this.y = y;
         this.z = z;
+        impX = 0;
+        impY = 0;
+        impZ = 0;
     }
 
     public int getX(){
@@ -39,14 +43,49 @@ public class WorldObject {
     }
 
     public void moveTo(int x, int y, int z) {
-        Logger.Log(this + " moved to " + (x +" : " + y + " : " +z));
         this.x = x;
         this.y = y;
         this.z = z;
     }
 
-    public void gameTick(GameLogicService gameLogic) {
+    public void setImpuls(int x, int y, int z) {
+        this.impX = x;
+        this.impY = y;
+        this.impZ = z;
+    }
 
+    public void gameTick(GameLogicService gameLogic) {
+        Logger.Log(this.toString());
+
+        this.x += impX;
+        this.y += impY;
+        this.z += impZ;
+
+        //Хардкод на размер карты
+        if (x < 0) {
+            x = 0;
+        }
+
+        if (x > 199) {
+            x = 199;
+        }
+
+        if (z < 0) {
+            z = 0;
+        }
+
+        if (z > 199) {
+            z = 199;
+        }
+
+        Logger.Log("moved to " + (x + " : " + y + " : " + z));
+
+        if (this.impX != 0 || this.impY != 0 || this.impZ != 0) {
+            this.impX = 0;
+            this.impY = 0;
+            this.impZ = 0;
+            //TODO: Рассылка сообщений об изменении координат
+        }
     }
 
     public String getTitle(){
