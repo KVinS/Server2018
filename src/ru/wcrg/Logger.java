@@ -1,56 +1,78 @@
 package ru.wcrg;
 
+import com.sun.istack.internal.NotNull;
+
+import java.io.PrintStream;
+import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 
 /**
  * Created by Эдуард on 09.12.2017.
  */
 
-class LogMessage {
-    private String message;
-    private boolean error;
-    LogMessage(String message, boolean error){
-        this.message=message;
-        this.error=error;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public boolean isError() {
-        return error;
-    }
-}
 
 public class Logger {
+    private static class LogMessage {
+        private String message;
+        private boolean error;
+
+        LogMessage(String message, boolean error) {
+            this.message = message;
+            this.error = error;
+        }
+
+        public String getMessage() {
+            return message;
+        }
+
+        public boolean isError() {
+            return error;
+        }
+    }
+
+
+    private static class LoggerThread implements Runnable {
+        private PrintStream log;
+        private PrintStream errors;
+        private static LinkedBlockingQueue<LogMessage> queue = new LinkedBlockingQueue<>();
+
+        public LoggerThread(PrintStream log, PrintStream errors) {
+            this.log = log;
+            this.errors = errors;
+        }
+
+        public void appendMessage(@NotNull LogMessage logMessage) {
+            queue.add(logMessage);
+        }
+
+        @Override
+        public void run() {
+            while (true) {
+                try {
+                    LogMessage logMessage = queue.take();
+                    if (logMessage.isError()) {
+                        errors.println(logMessage.getMessage());
+                    } else {
+                        log.println(logMessage.getMessage());
+                    }
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
 
     private static boolean debug = true;
     private static boolean showThreadId = false;
-    private static ConcurrentLinkedQueue<LogMessage> queue = new ConcurrentLinkedQueue<>();
+    private static LoggerThread loggerThread;
 
     static {
-        //Многопоточный логгер о смерти которого никто не узнает... Ведь веселее городить велосипед чем использовать Log4j
-        new Thread(new Runnable() {
-            public void run() {
-                while (true) {
-                    try {
-                        LogMessage logMessage = queue.poll();
-                        while (logMessage != null) {
-                            if (logMessage.isError()){
-                                System.err.println(logMessage.getMessage());
-                            } else {
-                                System.out.println(logMessage.getMessage());
-                            }
-                            logMessage = queue.poll();
-                        }
-                        Thread.sleep(1);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        }).start();
+        loggerThread = new LoggerThread(System.out, System.err);
+        Thread logThread = new Thread(loggerThread);
+        logThread.setName("LogThread");
+        logThread.setDaemon(true);
+        logThread.start();
     }
 
     static void StartTrackThreads() {
@@ -58,16 +80,16 @@ public class Logger {
     }
 
     static void StopTrackThreads() {
-        showThreadId = true;
+        showThreadId = false;
     }
 
     public static void Log(String message) {
         if (debug) {
-            queue.add(new LogMessage(((showThreadId ? Thread.currentThread().getName() + " " : "") + Thread.currentThread().getId() + " " + message + " (" + System.currentTimeMillis() + ")"), false));
+            loggerThread.appendMessage(new LogMessage(((showThreadId ? Thread.currentThread().getName() + " " : "") + Thread.currentThread().getId() + " " + message + " (" + System.currentTimeMillis() + ")"), false));
         }
     }
 
     public static void LogError(String message) {
-        queue.add(new LogMessage(((showThreadId ? Thread.currentThread().getName() + " " : "") + Thread.currentThread().getId() + " " + message + " (" + System.currentTimeMillis() + ")"), true));
+        loggerThread.appendMessage(new LogMessage(((showThreadId ? Thread.currentThread().getName() + " " : "") + Thread.currentThread().getId() + " " + message + " (" + System.currentTimeMillis() + ")"), true));
     }
 }

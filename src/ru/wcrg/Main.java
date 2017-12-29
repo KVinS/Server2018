@@ -22,6 +22,9 @@ public class Main {
 
         //Дофига ботов - проверка на быстродействее и стабильность
         //StressTest();
+
+        //Просто вывод цифр в консоль
+        //LogTest();
     }
 
     private static void waitExit(){
@@ -109,5 +112,14 @@ public class Main {
         }
 
         waitExit();
+    }
+
+    private static void LogTest(){
+        Logger.Log("1");
+        Logger.LogError("2");
+        Logger.Log("3");
+        Logger.LogError("4");
+        Logger.Log("5");
+        Logger.LogError("6");
     }
 }
