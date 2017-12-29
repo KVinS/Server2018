@@ -38,7 +38,6 @@ public class NPC extends Animal {
             Animal animal = animalsIterator.next();
             if (animal.isLife() && animal.getFraction() != getFraction()) {
                 int damage = -getAttack() - Random.Range(1,10);
-                Logger.Log(this + " attack " + animal + " tp " + damage + " damage.");
                 getMessageSystem().sendMessage(new MessageAttack(this.getAddress(), animal.getAddress(), this, animal, damage));
             }
         }

@@ -93,6 +93,7 @@ public class Animal extends WorldObject implements Abonent {
 
     public void attacked(Animal agressor, int deltaHp) {
         if (isLife()) {
+            Logger.Log(agressor + " attack " + this + " to " + deltaHp + " damage.");
             changeHP(deltaHp);
             if(!isLife()) {
                 getMessageSystem().sendMessage(new MessageGiveAward(this.getAddress(), agressor.getAddress(), this));
