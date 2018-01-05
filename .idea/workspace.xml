@@ -2,17 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1c720b85-752c-4aa9-bd38-41c8ce11a959" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ru/wcrg/service/BaseBalancer.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ru/wcrg/service/BaseService.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/server/ru/wcrg/Main.class" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/server/ru/wcrg/Logger.class" afterPath="$PROJECT_DIR$/out/production/server/ru/wcrg/Logger.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/server/ru/wcrg/world/creatures/npc/AIService.class" afterPath="$PROJECT_DIR$/out/production/server/ru/wcrg/world/creatures/npc/AIService.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/server/ru/wcrg/world/gameLogic/GameLogicService.class" afterPath="$PROJECT_DIR$/out/production/server/ru/wcrg/world/gameLogic/GameLogicService.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ru/wcrg/Main.java" afterPath="$PROJECT_DIR$/src/ru/wcrg/Main.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ru/wcrg/ThreadSettings.java" afterPath="$PROJECT_DIR$/src/ru/wcrg/ThreadSettings.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ru/wcrg/world/creatures/npc/AIService.java" afterPath="$PROJECT_DIR$/src/ru/wcrg/world/creatures/npc/AIService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ru/wcrg/world/gameLogic/GameLogicService.java" afterPath="$PROJECT_DIR$/src/ru/wcrg/world/gameLogic/GameLogicService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ru/wcrg/service/BaseBalancer.java" afterPath="$PROJECT_DIR$/src/ru/wcrg/service/BaseBalancer.java" />
     </list>
     <ignored path="server.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -96,15 +86,31 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BaseBalancer.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ru/wcrg/service/BaseBalancer.java">
+      <file leaf-file-name="Logger.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ru/wcrg/Logger.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="127">
-              <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+            <state relative-caret-position="204">
+              <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#872#873#0" expanded="true" />
-                <element signature="e#902#903#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BaseBalancer.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/ru/wcrg/service/BaseBalancer.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="326">
+              <caret line="35" column="69" selection-start-line="35" selection-start-column="69" selection-end-line="35" selection-end-column="69" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#1446#1447#0" expanded="true" />
+                <element signature="e#1476#1477#0" expanded="true" />
+                <element signature="e#1768#1769#0" expanded="true" />
+                <element signature="e#1820#1821#0" expanded="true" />
+                <element signature="e#1870#1871#0" expanded="true" />
+                <element signature="e#1922#1923#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -132,20 +138,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Animal.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ru/wcrg/world/creatures/Animal.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1241">
-              <caret line="95" column="70" selection-start-line="95" selection-start-column="70" selection-end-line="95" selection-end-column="70" />
-              <folding>
-                <element signature="e#3557#3558#0" expanded="true" />
-                <element signature="e#3595#3596#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ru/wcrg/Main.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="119">
@@ -202,8 +195,8 @@
         <option value="$PROJECT_DIR$/src/ru/wcrg/world/gameLogic/GameLogicService.java" />
         <option value="$PROJECT_DIR$/src/ru/wcrg/service/BaseService.java" />
         <option value="$PROJECT_DIR$/src/ru/wcrg/ThreadSettings.java" />
-        <option value="$PROJECT_DIR$/src/ru/wcrg/service/BaseBalancer.java" />
         <option value="$PROJECT_DIR$/src/ru/wcrg/Main.java" />
+        <option value="$PROJECT_DIR$/src/ru/wcrg/service/BaseBalancer.java" />
       </list>
     </option>
   </component>
@@ -968,15 +961,15 @@
       <updated>1514380721493</updated>
       <workItem from="1514380723816" duration="18174000" />
       <workItem from="1514419053768" duration="9727000" />
-      <workItem from="1515110616126" duration="3160000" />
+      <workItem from="1515110616126" duration="7263000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="31061000" />
+    <option name="totallyTimeSpent" value="35164000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1159,6 +1152,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
           <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1297,16 +1291,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ru/wcrg/Logger.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="354">
-          <caret line="87" column="34" selection-start-line="87" selection-start-column="34" selection-end-line="87" selection-end-column="34" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/ru/wcrg/world/InteractiveWorldObject.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
@@ -1395,23 +1379,37 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ru/wcrg/service/BaseBalancer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="127">
-          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#872#873#0" expanded="true" />
-            <element signature="e#902#903#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/ru/wcrg/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
           <caret line="91" column="0" selection-start-line="91" selection-start-column="0" selection-end-line="91" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ru/wcrg/Logger.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ru/wcrg/service/BaseBalancer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="326">
+          <caret line="35" column="69" selection-start-line="35" selection-start-column="69" selection-end-line="35" selection-end-column="69" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1446#1447#0" expanded="true" />
+            <element signature="e#1476#1477#0" expanded="true" />
+            <element signature="e#1768#1769#0" expanded="true" />
+            <element signature="e#1820#1821#0" expanded="true" />
+            <element signature="e#1870#1871#0" expanded="true" />
+            <element signature="e#1922#1923#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
