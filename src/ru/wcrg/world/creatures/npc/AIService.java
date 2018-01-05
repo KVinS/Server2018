@@ -5,6 +5,8 @@ import ru.wcrg.ThreadSettings;
 import ru.wcrg.messaging.Abonent;
 import ru.wcrg.messaging.Address;
 import ru.wcrg.messaging.MessageSystem;
+import ru.wcrg.service.BaseBalancer;
+import ru.wcrg.service.BaseService;
 import ru.wcrg.world.creatures.Animal;
 import ru.wcrg.world.creatures.IAnimalController;
 import java.util.concurrent.ConcurrentHashMap;
@@ -12,20 +14,14 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * Created by Эдуард on 28.12.2017.
  */
-public class AIService implements Abonent, Runnable, IAnimalController {
-    private final Address address = new Address();
-    private final MessageSystem messageSystem;
+public class AIService extends BaseService implements IAnimalController {
     private ConcurrentHashMap<NPC,NPC> npcs = new ConcurrentHashMap<NPC,NPC>();
 
-    public AIService(MessageSystem messageSystem) {
-        this.messageSystem = messageSystem;
-        messageSystem.addAbonent(this);
+    public AIService(BaseBalancer balancer, MessageSystem messageSystem) {
+        super(balancer, messageSystem);
         messageSystem.getAddressService().registerAIServices(this);
     }
 
-    public MessageSystem getMessageSystem() {
-        return messageSystem;
-    }
 
     @Override
     public String toString(){
@@ -33,34 +29,8 @@ public class AIService implements Abonent, Runnable, IAnimalController {
     }
 
     @Override
-    public Address getAddress() {
-        return address;
-    }
-
-    @Override
-    public void run() {
-        while (true) {
-            long startTime = System.currentTimeMillis();
-
-            messageSystem.execForAbonent(this);
-
-            npcs.values().stream().filter(npc -> npc.isLife()).forEach(NPC::AI);
-
-            long currentTime = System.currentTimeMillis();
-            long sleepTime = ThreadSettings.SERVICE_SLEEP_TIME - (currentTime - startTime);
-
-            Logger.Log(this + " обработана за: " + (currentTime - startTime));
-
-            if (sleepTime > 0) {
-                try {
-                    Thread.sleep(sleepTime);
-                } catch (InterruptedException ex) {
-                    ex.printStackTrace();
-                }
-            } else {
-                Logger.LogError(this + " long work: " + sleepTime);
-            }
-        }
+    protected void ServiceWork(){
+        npcs.values().stream().filter(npc -> npc.isLife()).forEach(NPC::AI);
     }
 
     public void registerNPC(NPC npc){

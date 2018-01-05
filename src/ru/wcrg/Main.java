@@ -1,6 +1,7 @@
 package ru.wcrg;
 
 import ru.wcrg.messaging.MessageSystem;
+import ru.wcrg.service.BaseBalancer;
 import ru.wcrg.world.GameWorld;
 import ru.wcrg.world.WorldObject;
 import ru.wcrg.world.creatures.npc.AIService;
@@ -35,14 +36,33 @@ public class Main {
     }
 
     private static void createAIService(MessageSystem messageSystem){
-        final Thread aiService = new Thread(new AIService(messageSystem));
+        final Thread aiService = new Thread(new AIService(CreateAIBalancer(messageSystem), messageSystem));
         aiService.setName("AIService"+0);
         aiService.setDaemon(true);
         aiService.start();
     }
 
+    private static BaseBalancer CreateAIBalancer(MessageSystem messageSystem){
+        BaseBalancer aiBalancer = new BaseBalancer(messageSystem);
+        final Thread aiBalancerThread = new Thread(aiBalancer);
+        aiBalancerThread.setName("AIBalancer");
+        aiBalancerThread.setDaemon(true);
+        aiBalancerThread.start();
+        return aiBalancer;
+    }
+
+    private static BaseBalancer CreateGameLogicBalancer(MessageSystem messageSystem){
+        BaseBalancer gameLogicBalancer = new BaseBalancer(messageSystem);
+        final Thread gameLogicBalancerThread = new Thread(gameLogicBalancer);
+        gameLogicBalancerThread.setName("GameLogicBalancer");
+        gameLogicBalancerThread.setDaemon(true);
+        gameLogicBalancerThread.start();
+        return gameLogicBalancer;
+    }
+
     private static void MainTest(){
         final MessageSystem messageSystem = new MessageSystem();
+        final BaseBalancer gameLogicBalancer = CreateGameLogicBalancer(messageSystem);
         createAIService(messageSystem);
 
         GameWorld gameWorld = new GameWorld();
@@ -53,8 +73,9 @@ public class Main {
         gameWorld.addWorldObject(spawner1);
         gameWorld.addWorldObject(spawner2);
 
+
         for (int x = 0; x < 2; x++) {
-            final Thread gameLogic = new Thread(new GameLogicService(x * 100, 0, 300, 300, gameWorld, messageSystem));
+            final Thread gameLogic = new Thread(new GameLogicService(gameLogicBalancer, messageSystem, x * 100, 0, 300, 300, gameWorld));
             gameLogic.setName("GameLogicService "+x);
             gameLogic.setDaemon(true);
             gameLogic.start();
@@ -66,6 +87,7 @@ public class Main {
     private  static void MainTest2(){
         Logger.StartTrackThreads();
         final MessageSystem messageSystem = new MessageSystem();
+        final BaseBalancer gameLogicBalancer = CreateGameLogicBalancer(messageSystem);
         createAIService(messageSystem);
 
         GameWorld gameWorld = new GameWorld();
@@ -75,8 +97,10 @@ public class Main {
         gameWorld.addAnimal(dog);
         gameWorld.addAnimal(cat);
 
+
+
             for (int x = 0; x < 2; x++) {
-                final Thread gameLogic = new Thread(new GameLogicService(x * 100, 0, 100, 100, gameWorld, messageSystem));
+                final Thread gameLogic = new Thread(new GameLogicService(gameLogicBalancer, messageSystem, x * 100, 0, 100, 100, gameWorld));
                 gameLogic.setName("GL" + x);
                 gameLogic.setDaemon(true);
                 gameLogic.start();
@@ -94,6 +118,7 @@ public class Main {
 
     private static void StressTest(){
         final MessageSystem messageSystem = new MessageSystem();
+        final BaseBalancer gameLogicBalancer = CreateGameLogicBalancer(messageSystem);
         createAIService(messageSystem);
 
         GameWorld gameWorld = new GameWorld();
@@ -105,7 +130,7 @@ public class Main {
         gameWorld.addWorldObject(spawner2);
 
         for (int x = 0; x < 2; x++) {
-            final Thread gameLogic = new Thread(new GameLogicService(x * 100, 0, 300, 300, gameWorld, messageSystem));
+            final Thread gameLogic = new Thread(new GameLogicService(gameLogicBalancer, messageSystem, x * 100, 0, 300, 300, gameWorld));
             gameLogic.setName("GameLogicService "+x);
             gameLogic.setDaemon(true);
             gameLogic.start();
