@@ -32,7 +32,6 @@ public class GameLogicService extends BaseService {
         //main.ru.wcrg.messaging.getAddressService().registerGameLogic(this);
     }
 
-    @Override
     public String toString(){
         return  "GameLogicService " + x + ":" + z;
     }

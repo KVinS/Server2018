@@ -19,10 +19,10 @@ public class Main {
         //MainTest();
 
         //Генерация ботов на границе чанков
-        MainTest2();
+        //MainTest2();
 
         //Дофига ботов - проверка на быстродействее и стабильность
-        //StressTest();
+        StressTest();
 
         //Просто вывод цифр в консоль
         //LogTest();
@@ -37,7 +37,7 @@ public class Main {
 
     private static void createAIService(MessageSystem messageSystem){
         final Thread aiService = new Thread(new AIService(CreateAIBalancer(messageSystem), messageSystem));
-        aiService.setName("AIService"+0);
+        aiService.setName("AI"+0);
         aiService.setDaemon(true);
         aiService.start();
     }
@@ -45,7 +45,7 @@ public class Main {
     private static BaseBalancer CreateAIBalancer(MessageSystem messageSystem){
         BaseBalancer aiBalancer = new BaseBalancer(messageSystem);
         final Thread aiBalancerThread = new Thread(aiBalancer);
-        aiBalancerThread.setName("AIBalancer");
+        aiBalancerThread.setName("AIB");
         aiBalancerThread.setDaemon(true);
         aiBalancerThread.start();
         return aiBalancer;
@@ -54,13 +54,15 @@ public class Main {
     private static BaseBalancer CreateGameLogicBalancer(MessageSystem messageSystem){
         BaseBalancer gameLogicBalancer = new BaseBalancer(messageSystem);
         final Thread gameLogicBalancerThread = new Thread(gameLogicBalancer);
-        gameLogicBalancerThread.setName("GameLogicBalancer");
+        gameLogicBalancerThread.setName("GLB");
         gameLogicBalancerThread.setDaemon(true);
         gameLogicBalancerThread.start();
         return gameLogicBalancer;
     }
 
     private static void MainTest(){
+        Logger.SetLogLevel(10);
+
         final MessageSystem messageSystem = new MessageSystem();
         final BaseBalancer gameLogicBalancer = CreateGameLogicBalancer(messageSystem);
         createAIService(messageSystem);
@@ -76,7 +78,7 @@ public class Main {
 
         for (int x = 0; x < 2; x++) {
             final Thread gameLogic = new Thread(new GameLogicService(gameLogicBalancer, messageSystem, x * 100, 0, 300, 300, gameWorld));
-            gameLogic.setName("GameLogicService "+x);
+            gameLogic.setName("GL"+x);
             gameLogic.setDaemon(true);
             gameLogic.start();
         }
@@ -85,6 +87,7 @@ public class Main {
     }
 
     private  static void MainTest2(){
+        Logger.SetLogLevel(10);
         Logger.StartTrackThreads();
         final MessageSystem messageSystem = new MessageSystem();
         final BaseBalancer gameLogicBalancer = CreateGameLogicBalancer(messageSystem);
@@ -117,6 +120,7 @@ public class Main {
 
 
     private static void StressTest(){
+        Logger.SetLogLevel(40);
         final MessageSystem messageSystem = new MessageSystem();
         final BaseBalancer gameLogicBalancer = CreateGameLogicBalancer(messageSystem);
         createAIService(messageSystem);
@@ -131,7 +135,7 @@ public class Main {
 
         for (int x = 0; x < 2; x++) {
             final Thread gameLogic = new Thread(new GameLogicService(gameLogicBalancer, messageSystem, x * 100, 0, 300, 300, gameWorld));
-            gameLogic.setName("GameLogicService "+x);
+            gameLogic.setName("GL"+x);
             gameLogic.setDaemon(true);
             gameLogic.start();
         }

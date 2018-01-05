@@ -16,7 +16,7 @@ import java.util.Map;
 public class BaseBalancer implements Abonent, Runnable {
     protected final Address address = new Address();
     protected final MessageSystem messageSystem;
-    protected final HashMap<BaseService, Integer> servicesDuration;
+    protected final HashMap<BaseService, Long> servicesDuration;
 
     public BaseBalancer(MessageSystem messageSystem){
         this.messageSystem = messageSystem;
@@ -29,8 +29,9 @@ public class BaseBalancer implements Abonent, Runnable {
         while (true) {
             messageSystem.execForAbonent(this);
 
-            for(Map.Entry<BaseService, Integer> entry : servicesDuration.entrySet()) {
-                int average = entry.getValue();
+            for(Map.Entry<BaseService, Long> entry : servicesDuration.entrySet()) {
+                long average = entry.getValue();
+                Logger.Log(entry.getKey() +" average: " +average, 50);
                 if (average > ThreadSettings.SERVICE_SLEEP_TIME){
                     BaseService service = entry.getKey();
                     Logger.LogError("Need new service for " + service);
@@ -50,14 +51,14 @@ public class BaseBalancer implements Abonent, Runnable {
         return address;
     }
 
-    public void reportDurationWork(BaseService baseService, int duration){
-        int average = servicesDuration.get(baseService);
-        int newAverage = (average + duration) / 2;
+    public void reportDurationWork(BaseService baseService, long duration){
+        long average = servicesDuration.get(baseService);
+        long newAverage = (average + duration) / 2;
         servicesDuration.put(baseService, newAverage);
     }
 
     public void add(BaseService baseService){
-        servicesDuration.put(baseService, 0);
+        servicesDuration.put(baseService, 0L);
     }
 
     public void remove(BaseService baseService){

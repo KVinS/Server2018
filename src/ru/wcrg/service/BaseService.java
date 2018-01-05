@@ -5,6 +5,7 @@ import ru.wcrg.ThreadSettings;
 import ru.wcrg.messaging.Abonent;
 import ru.wcrg.messaging.Address;
 import ru.wcrg.messaging.MessageSystem;
+import ru.wcrg.service.messages.MessageReportDuration;
 import ru.wcrg.world.creatures.npc.NPC;
 
 import javax.xml.ws.Service;
@@ -20,6 +21,7 @@ public abstract class BaseService implements Abonent, Runnable {
     public BaseService(BaseBalancer balancer, MessageSystem messageSystem){
         this.balancer = balancer;
         this.messageSystem = messageSystem;
+        balancer.add(this);
         messageSystem.addAbonent(this);
     }
 
@@ -35,9 +37,12 @@ public abstract class BaseService implements Abonent, Runnable {
             ServiceWork();
 
             long currentTime = System.currentTimeMillis();
-            long sleepTime = ThreadSettings.SERVICE_SLEEP_TIME - (currentTime - startTime);
+            long duration = currentTime - startTime;
+            long sleepTime = ThreadSettings.SERVICE_SLEEP_TIME - duration;
 
-            Logger.Log(this + " обработана за: " + (currentTime - startTime));
+            Logger.Log(this + " обработана за: " + duration, 30);
+
+            messageSystem.sendMessage(new MessageReportDuration(this.getAddress(), balancer.getAddress(), this, duration));
 
             if (sleepTime > 0) {
                 try {
