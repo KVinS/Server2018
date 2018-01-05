@@ -15,11 +15,11 @@ import java.util.concurrent.LinkedBlockingQueue;
 public class Logger {
     private static class LogMessage {
         private String message;
-        private boolean error;
+        private int logLevel;
 
-        LogMessage(String message, boolean error) {
+        LogMessage(String message, int logLevel) {
             this.message = message;
-            this.error = error;
+            this.logLevel = logLevel;
         }
 
         public String getMessage() {
@@ -27,10 +27,11 @@ public class Logger {
         }
 
         public boolean isError() {
-            return error;
+            return logLevel == ERROR_LEVEL;
         }
     }
 
+    private static int ERROR_LEVEL = 1000;
 
     private static class LoggerThread implements Runnable {
         private PrintStream log;
@@ -64,6 +65,7 @@ public class Logger {
     }
 
     private static boolean debug = true;
+    private static int logLevel = 0;
     private static boolean showThreadId = false;
     private static LoggerThread loggerThread;
 
@@ -75,21 +77,29 @@ public class Logger {
         logThread.start();
     }
 
-    static void StartTrackThreads() {
+    public static void StartTrackThreads() {
         showThreadId = true;
     }
 
-    static void StopTrackThreads() {
+    public static void StopTrackThreads() {
         showThreadId = false;
     }
 
+    public static void SetLogLevel(int newLogLevel) {
+        logLevel = newLogLevel;
+    }
+
     public static void Log(String message) {
-        if (debug) {
-            loggerThread.appendMessage(new LogMessage(((showThreadId ? Thread.currentThread().getName() + " " : "") + " " + message + " (" + System.currentTimeMillis() + ")"), false));
+        Log(message, 0);
+    }
+
+    public static void Log(String message, int logLevel) {
+        if (debug && logLevel >= Logger.logLevel) {
+            loggerThread.appendMessage(new LogMessage(((showThreadId ? Thread.currentThread().getName() + " " : "") + " " + message + " (" + System.currentTimeMillis() + ")"), logLevel));
         }
     }
 
     public static void LogError(String message) {
-        loggerThread.appendMessage(new LogMessage(((showThreadId ? Thread.currentThread().getName() + " " : "") + " " + message + " (" + System.currentTimeMillis() + ")"), true));
+        loggerThread.appendMessage(new LogMessage(((showThreadId ? Thread.currentThread().getName() + " " : "") + " " + message + " (" + System.currentTimeMillis() + ")"), ERROR_LEVEL));
     }
 }
