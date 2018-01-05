@@ -85,11 +85,11 @@ public class Logger {
 
     public static void Log(String message) {
         if (debug) {
-            loggerThread.appendMessage(new LogMessage(((showThreadId ? Thread.currentThread().getName() + " " : "") + Thread.currentThread().getId() + " " + message + " (" + System.currentTimeMillis() + ")"), false));
+            loggerThread.appendMessage(new LogMessage(((showThreadId ? Thread.currentThread().getName() + " " : "") + " " + message + " (" + System.currentTimeMillis() + ")"), false));
         }
     }
 
     public static void LogError(String message) {
-        loggerThread.appendMessage(new LogMessage(((showThreadId ? Thread.currentThread().getName() + " " : "") + Thread.currentThread().getId() + " " + message + " (" + System.currentTimeMillis() + ")"), true));
+        loggerThread.appendMessage(new LogMessage(((showThreadId ? Thread.currentThread().getName() + " " : "") + " " + message + " (" + System.currentTimeMillis() + ")"), true));
     }
 }
