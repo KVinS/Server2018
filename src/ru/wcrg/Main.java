@@ -4,11 +4,13 @@ import ru.wcrg.messaging.MessageSystem;
 import ru.wcrg.service.BaseBalancer;
 import ru.wcrg.world.GameWorld;
 import ru.wcrg.world.WorldObject;
+import ru.wcrg.world.WorldZone;
 import ru.wcrg.world.creatures.npc.AIService;
 import ru.wcrg.world.creatures.npc.NPC;
 import ru.wcrg.world.creatures.npc.SpawnerNPC;
 import ru.wcrg.world.gameLogic.GameLogicService;
 
+import java.util.LinkedList;
 import java.util.Scanner;
 
 public class Main {
@@ -36,7 +38,10 @@ public class Main {
     }
 
     private static void createGameLogicService(String name, BaseBalancer gameLogicBalancer, MessageSystem messageSystem, int x, int z, int sizeX, int sizeZ, GameWorld gameWorld){
-        GameLogicService gameLogic = new GameLogicService(gameLogicBalancer, messageSystem, x, z, sizeX, sizeZ, gameWorld);
+        LinkedList<WorldZone> worldZones = new LinkedList<>();
+        worldZones.add(new WorldZone(x, z, sizeX, sizeZ));
+
+        GameLogicService gameLogic = new GameLogicService(gameLogicBalancer, messageSystem, worldZones, gameWorld);
         final Thread gameLogicThread = new Thread(gameLogic);
         gameLogicThread.setName(name);
         gameLogicThread.setDaemon(true);

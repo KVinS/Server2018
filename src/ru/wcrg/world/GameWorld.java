@@ -9,6 +9,7 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * Created by Эдуард on 09.12.2017.
  */
+
 public class GameWorld {
     public ConcurrentHashMap<Animal,Animal> animals = new ConcurrentHashMap<Animal,Animal>();
     private ConcurrentHashMap<InteractiveWorldObject,InteractiveWorldObject> objects = new ConcurrentHashMap<InteractiveWorldObject,InteractiveWorldObject>();

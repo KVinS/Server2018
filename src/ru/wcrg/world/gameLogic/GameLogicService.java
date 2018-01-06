@@ -9,37 +9,42 @@ import ru.wcrg.service.BaseBalancer;
 import ru.wcrg.service.BaseService;
 import ru.wcrg.world.GameWorld;
 import ru.wcrg.world.InteractiveWorldObject;
+import ru.wcrg.world.WorldZone;
 import ru.wcrg.world.creatures.Animal;
 
 import java.util.Iterator;
+import java.util.List;
 
 /**
  * Created by Эдуард on 09.12.2017.
  */
 public class GameLogicService extends BaseService {
-    private int x, z, width, height;
+    private List<WorldZone> worldZones;
     private GameWorld gameWorld;
 
-    public GameLogicService(BaseBalancer balancer, MessageSystem messageSystem, int x, int z, int width, int height, GameWorld gameWorld) {
+    public GameLogicService(BaseBalancer balancer, MessageSystem messageSystem, List<WorldZone> worldZones, GameWorld gameWorld) {
         super(balancer, messageSystem);
-        this.x = x;
-        this.z = z;
-        this.width = width;
-        this.height = height;
-
+        this.worldZones = worldZones;
         this.gameWorld = gameWorld;
 
         //main.ru.wcrg.messaging.getAddressService().registerGameLogic(this);
     }
 
     public String toString(){
-        return  "GameLogicService " + x + ":" + z;
+        return  "GameLogicService ";
     }
 
     @Override
     protected void ServiceWork() {
-        //Получаю список зверей, за которые отвечает этот обработчик
-        Iterator<Animal> animalsIterator = gameWorld.getAnimals(x, z, x+width, z+height);
+
+        for (WorldZone worldZone : worldZones) {
+            int x = worldZone.getX();
+            int z = worldZone.getZ();
+            int sizeX = worldZone.getSizeX();
+            int sizeZ = worldZone.getSizeZ();
+
+            //Получаю список зверей, за которые отвечает этот обработчик
+        Iterator<Animal> animalsIterator = gameWorld.getAnimals(x, z, x+sizeX, z+sizeZ);
         while (animalsIterator.hasNext()) {
             //получаю животное на обработку
             Animal animal = animalsIterator.next();
@@ -49,7 +54,7 @@ public class GameLogicService extends BaseService {
             messageSystem.execForAbonent(animal);
         }
 
-        Iterator<InteractiveWorldObject> objectsIterator = gameWorld.getObjects(x, z, x+width, z+height);
+        Iterator<InteractiveWorldObject> objectsIterator = gameWorld.getObjects(x, z, x+sizeX, z+sizeZ);
         while (objectsIterator.hasNext()) {
             //получаю объект на обработку
             InteractiveWorldObject object = objectsIterator.next();
@@ -58,5 +63,10 @@ public class GameLogicService extends BaseService {
             //применяю сообщения к объекту
             messageSystem.execForAbonent(object);
         }
+    }
+    }
+
+    public void setZones(List<WorldZone> newZones) {
+        this.worldZones = newZones;
     }
 }
