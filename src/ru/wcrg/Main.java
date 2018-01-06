@@ -35,14 +35,22 @@ public class Main {
         }
     }
 
+    private static void createGameLogicService(String name, BaseBalancer gameLogicBalancer, MessageSystem messageSystem, int x, int z, int sizeX, int sizeZ, GameWorld gameWorld){
+        GameLogicService gameLogic = new GameLogicService(gameLogicBalancer, messageSystem, x, z, sizeX, sizeZ, gameWorld);
+        final Thread gameLogicThread = new Thread(gameLogic);
+        gameLogicThread.setName(name);
+        gameLogicThread.setDaemon(true);
+        gameLogicThread.start();
+    }
+
     private static void createAIService(MessageSystem messageSystem){
-        final Thread aiService = new Thread(new AIService(CreateAIBalancer(messageSystem), messageSystem));
+        final Thread aiService = new Thread(new AIService(createAIBalancer(messageSystem), messageSystem));
         aiService.setName("AI"+0);
         aiService.setDaemon(true);
         aiService.start();
     }
 
-    private static BaseBalancer CreateAIBalancer(MessageSystem messageSystem){
+    private static BaseBalancer createAIBalancer(MessageSystem messageSystem){
         BaseBalancer aiBalancer = new BaseBalancer(messageSystem);
         final Thread aiBalancerThread = new Thread(aiBalancer);
         aiBalancerThread.setName("AIB");
@@ -51,7 +59,7 @@ public class Main {
         return aiBalancer;
     }
 
-    private static BaseBalancer CreateGameLogicBalancer(MessageSystem messageSystem){
+    private static BaseBalancer createGameLogicBalancer(MessageSystem messageSystem){
         BaseBalancer gameLogicBalancer = new BaseBalancer(messageSystem);
         final Thread gameLogicBalancerThread = new Thread(gameLogicBalancer);
         gameLogicBalancerThread.setName("GLB");
@@ -64,7 +72,7 @@ public class Main {
         Logger.SetLogLevel(10);
 
         final MessageSystem messageSystem = new MessageSystem();
-        final BaseBalancer gameLogicBalancer = CreateGameLogicBalancer(messageSystem);
+        final BaseBalancer gameLogicBalancer = createGameLogicBalancer(messageSystem);
         createAIService(messageSystem);
 
         GameWorld gameWorld = new GameWorld();
@@ -75,12 +83,10 @@ public class Main {
         gameWorld.addWorldObject(spawner1);
         gameWorld.addWorldObject(spawner2);
 
-
+        int sizeX = 300;
+        int sizeZ = 100;
         for (int x = 0; x < 2; x++) {
-            final Thread gameLogic = new Thread(new GameLogicService(gameLogicBalancer, messageSystem, x * 100, 0, 300, 300, gameWorld));
-            gameLogic.setName("GL"+x);
-            gameLogic.setDaemon(true);
-            gameLogic.start();
+            createGameLogicService("GL"+x, gameLogicBalancer, messageSystem, x * sizeX, 0, sizeX, sizeZ, gameWorld);
         }
 
         waitExit();
@@ -90,7 +96,7 @@ public class Main {
         Logger.SetLogLevel(10);
         Logger.StartTrackThreads();
         final MessageSystem messageSystem = new MessageSystem();
-        final BaseBalancer gameLogicBalancer = CreateGameLogicBalancer(messageSystem);
+        final BaseBalancer gameLogicBalancer = createGameLogicBalancer(messageSystem);
         createAIService(messageSystem);
 
         GameWorld gameWorld = new GameWorld();
@@ -100,21 +106,18 @@ public class Main {
         gameWorld.addAnimal(dog);
         gameWorld.addAnimal(cat);
 
+        int sizeX = 100;
+        int sizeZ = 100;
+        for (int x = 0; x < 2; x++) {
+            createGameLogicService("GL"+x, gameLogicBalancer, messageSystem, x * sizeX, 0, sizeX, sizeZ, gameWorld);
+        }
 
-
-            for (int x = 0; x < 2; x++) {
-                final Thread gameLogic = new Thread(new GameLogicService(gameLogicBalancer, messageSystem, x * 100, 0, 100, 100, gameWorld));
-                gameLogic.setName("GL" + x);
-                gameLogic.setDaemon(true);
-                gameLogic.start();
-            }
-
-            try {
-                Thread.sleep(4000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            System.out.println("Конец теста №" + i);
+        try {
+            Thread.sleep(4000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println("Конец теста №" + i);
         }
     }
 
@@ -122,7 +125,7 @@ public class Main {
     private static void StressTest(){
         Logger.SetLogLevel(40);
         final MessageSystem messageSystem = new MessageSystem();
-        final BaseBalancer gameLogicBalancer = CreateGameLogicBalancer(messageSystem);
+        final BaseBalancer gameLogicBalancer = createGameLogicBalancer(messageSystem);
         createAIService(messageSystem);
 
         GameWorld gameWorld = new GameWorld();
@@ -133,11 +136,10 @@ public class Main {
         gameWorld.addWorldObject(spawner1);
         gameWorld.addWorldObject(spawner2);
 
+        int sizeX = 300;
+        int sizeZ = 100;
         for (int x = 0; x < 2; x++) {
-            final Thread gameLogic = new Thread(new GameLogicService(gameLogicBalancer, messageSystem, x * 100, 0, 300, 300, gameWorld));
-            gameLogic.setName("GL"+x);
-            gameLogic.setDaemon(true);
-            gameLogic.start();
+            createGameLogicService("GL"+x, gameLogicBalancer, messageSystem, x * sizeX, 0, sizeX, sizeZ, gameWorld);
         }
 
         waitExit();
