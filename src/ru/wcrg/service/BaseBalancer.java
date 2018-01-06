@@ -26,6 +26,13 @@ public class BaseBalancer implements Abonent, Runnable {
 
     @Override
     public void run() {
+        //Некоторое время ничего не делать, чтобы просто собрать статистику
+        try {
+            Thread.sleep(ThreadSettings.BALANCER_QUARANTINE_TIME);
+        } catch (InterruptedException ex) {
+            ex.printStackTrace();
+        }
+
         while (true) {
             messageSystem.execForAbonent(this);
 
