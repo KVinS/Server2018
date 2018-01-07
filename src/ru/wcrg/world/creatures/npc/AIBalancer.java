@@ -1,6 +1,7 @@
 package ru.wcrg.world.creatures.npc;
 
 import ru.wcrg.Logger;
+import ru.wcrg.ThreadSettings;
 import ru.wcrg.messaging.MessageSystem;
 import ru.wcrg.service.BaseBalancer;
 import ru.wcrg.service.BaseService;
@@ -23,6 +24,8 @@ public class AIBalancer extends BaseBalancer {
     public AIBalancer(MessageSystem messageSystem) {
         super(messageSystem);
         messageSystem.getAddressService().registerAIBalancer(this);
+
+        sleepTime = ThreadSettings.AI_BALANCER_SLEEP_TIME;
     }
 
     @Override

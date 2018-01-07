@@ -5,7 +5,6 @@ import ru.wcrg.ThreadSettings;
 import ru.wcrg.messaging.Abonent;
 import ru.wcrg.messaging.Address;
 import ru.wcrg.messaging.MessageSystem;
-import ru.wcrg.world.creatures.npc.NPC;
 
 import java.util.*;
 
@@ -16,6 +15,7 @@ public abstract class BaseBalancer implements Abonent, Runnable {
     protected final Address address = new Address();
     protected final MessageSystem messageSystem;
     protected final HashMap<BaseService, Long> servicesDuration;
+    protected int sleepTime = ThreadSettings.BALANCER_SLEEP_TIME;
 
     public BaseBalancer(MessageSystem messageSystem){
         this.messageSystem = messageSystem;
@@ -51,7 +51,7 @@ public abstract class BaseBalancer implements Abonent, Runnable {
             queueToDivide.forEach(this::divideLoad);
 
             try {
-                Thread.sleep(ThreadSettings.BALANCER_SLEEP_TIME);
+                Thread.sleep(sleepTime);
             } catch (InterruptedException ex) {
                 ex.printStackTrace();
             }

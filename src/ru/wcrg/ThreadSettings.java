@@ -6,6 +6,7 @@ package ru.wcrg;
     public interface ThreadSettings {
         int CLIENT_SLEEP_TIME = 25;
         int SERVICE_SLEEP_TIME = 100;
+        int AI_BALANCER_SLEEP_TIME = 100;
         int BALANCER_SLEEP_TIME = 1000;
         int BALANCER_QUARANTINE_TIME = 10000;
     }
