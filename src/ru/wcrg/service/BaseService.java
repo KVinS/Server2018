@@ -6,9 +6,9 @@ import ru.wcrg.messaging.Abonent;
 import ru.wcrg.messaging.Address;
 import ru.wcrg.messaging.MessageSystem;
 import ru.wcrg.service.messages.MessageReportDuration;
-import ru.wcrg.world.creatures.npc.NPC;
 
-import javax.xml.ws.Service;
+import java.util.concurrent.atomic.AtomicBoolean;
+
 
 /**
  * Created by Эдуард on 04.01.2018.
@@ -18,6 +18,8 @@ public abstract class BaseService implements Abonent, Runnable {
     protected final BaseBalancer balancer;
     protected final Address address = new Address();
     protected final MessageSystem messageSystem;
+
+    protected boolean run = true;
 
     public BaseService(String name, BaseBalancer balancer, MessageSystem messageSystem){
         this.name = name;
@@ -31,7 +33,7 @@ public abstract class BaseService implements Abonent, Runnable {
 
     @Override
     public void run() {
-        while (true) {
+        while (run) {
             long startTime = System.currentTimeMillis();
 
             messageSystem.execForAbonent(this);
@@ -56,6 +58,11 @@ public abstract class BaseService implements Abonent, Runnable {
                 Logger.LogError(this + " long work: " + sleepTime);
             }
         }
+        Logger.Log(this + " stopped ", 45);
+    }
+
+    public void stop() {
+        run = false;
     }
 
     public MessageSystem getMessageSystem() {
@@ -75,4 +82,5 @@ public abstract class BaseService implements Abonent, Runnable {
     public String toString(){
         return name;
     }
+
 }

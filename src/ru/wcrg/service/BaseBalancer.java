@@ -34,21 +34,30 @@ public abstract class BaseBalancer implements Abonent, Runnable {
 
         while (true) {
             Queue<BaseService> queueToDivide = new LinkedList<>();
+            Deque<BaseService> queueToOptimization = new LinkedList<>();
+
             messageSystem.execForAbonent(this);
 
             for(Map.Entry<BaseService, Long> entry : servicesDuration.entrySet()) {
                 long average = entry.getValue();
                 Logger.Log(entry.getKey() +" average: " +average, 50);
+                BaseService service = entry.getKey();
                 if (average > ThreadSettings.SERVICE_SLEEP_TIME){
-                    BaseService service = entry.getKey();
+                    //Добавляем сервис в очередь на разделение
                     queueToDivide.add(service);
-                }
-                if (average < ThreadSettings.SERVICE_SLEEP_TIME / 4){
-                    //TODO: Удаление?
+                } else if (average < ThreadSettings.SERVICE_SLEEP_TIME / 4){
+                    //Определяем список слабонагруженных сервисов,
+                    queueToOptimization.add(service);
                 }
             }
 
+            //TODO: Добавить забор сервисов из queueToOptimization
             queueToDivide.forEach(this::divideLoad);
+
+            if (queueToOptimization.size() > 1){
+                optimizeLoad(queueToOptimization);
+            }
+
 
             try {
                 Thread.sleep(sleepTime);
@@ -69,6 +78,7 @@ public abstract class BaseBalancer implements Abonent, Runnable {
         servicesDuration.put(baseService, newAverage);
     }
 
+    protected abstract void optimizeLoad(Deque<BaseService> baseService);
     protected abstract void divideLoad(BaseService baseService);
 
     public void add(BaseService baseService){

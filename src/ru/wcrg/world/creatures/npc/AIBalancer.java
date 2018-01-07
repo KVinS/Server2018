@@ -5,6 +5,7 @@ import ru.wcrg.ThreadSettings;
 import ru.wcrg.messaging.MessageSystem;
 import ru.wcrg.service.BaseBalancer;
 import ru.wcrg.service.BaseService;
+import ru.wcrg.service.messages.MessageStopService;
 import ru.wcrg.world.WorldZone;
 import ru.wcrg.world.creatures.messages.MessageFindControllerForNPC;
 import ru.wcrg.world.creatures.messages.MessageRegisterNPC;
@@ -12,8 +13,10 @@ import ru.wcrg.world.creatures.messages.MessageUpdateNPC;
 import ru.wcrg.world.gameLogic.GameLogicService;
 import ru.wcrg.world.gameLogic.messages.MessageUpdateZone;
 
+import java.util.Deque;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 /**
  * Created by Эдуард on 07.01.2018.
@@ -27,6 +30,22 @@ public class AIBalancer extends BaseBalancer {
 
         sleepTime = ThreadSettings.AI_BALANCER_SLEEP_TIME;
     }
+
+    @Override
+    protected void optimizeLoad(Deque<BaseService> services) {
+        while (services.size() >= 2) {
+            AIService service1 = (AIService) services.removeFirst();
+            AIService service2 = (AIService) services.removeLast();
+
+            LinkedList<NPC> newNPC = new LinkedList<>();
+            newNPC.addAll(service1.getNPC());
+            newNPC.addAll(service2.getNPC());
+            messageSystem.sendMessage(new MessageUpdateNPC(getAddress(), service1.getAddress(), newNPC));
+            messageSystem.sendMessage(new MessageStopService(getAddress(), service2.getAddress()));
+            remove(service2);
+        }
+    }
+
 
     @Override
     protected void divideLoad(BaseService baseService) {
