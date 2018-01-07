@@ -86,7 +86,6 @@ public abstract class BaseBalancer implements Abonent, Runnable {
     }
 
     protected BaseService getLowestService(){
-        //servicesDuration.entrySet().stream().min(e -> e.getValue());
-        return getRandomService();
+        return servicesDuration.entrySet().stream().min((e1, e2) -> Long.compare(e1.getValue(), e2.getValue())).get().getKey();
     }
 }
