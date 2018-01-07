@@ -22,16 +22,17 @@ public class GameLogicService extends BaseService {
     private List<WorldZone> worldZones;
     private GameWorld gameWorld;
 
-    public GameLogicService(BaseBalancer balancer, MessageSystem messageSystem, List<WorldZone> worldZones, GameWorld gameWorld) {
-        super(balancer, messageSystem);
+    public GameLogicService(String name, BaseBalancer balancer, MessageSystem messageSystem, List<WorldZone> worldZones, GameWorld gameWorld) {
+        super(name, balancer, messageSystem);
         this.worldZones = worldZones;
         this.gameWorld = gameWorld;
 
         //main.ru.wcrg.messaging.getAddressService().registerGameLogic(this);
     }
 
-    public String toString(){
-        return  "GameLogicService ";
+    @Override
+    public GameLogicService clone(){
+        return new GameLogicService("Clone " + name, balancer, messageSystem, null, gameWorld);
     }
 
     @Override
@@ -68,5 +69,9 @@ public class GameLogicService extends BaseService {
 
     public void setZones(List<WorldZone> newZones) {
         this.worldZones = newZones;
+    }
+
+    public List<WorldZone> getZones() {
+        return this.worldZones;
     }
 }

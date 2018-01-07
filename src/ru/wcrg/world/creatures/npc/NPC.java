@@ -5,10 +5,7 @@ import ru.wcrg.messaging.MessageSystem;
 import ru.wcrg.utility.Random;
 import ru.wcrg.world.GameWorld;
 import ru.wcrg.world.creatures.Animal;
-import ru.wcrg.world.creatures.messages.MessageMoveTo;
-import ru.wcrg.world.creatures.messages.MessageRegisterNPC;
-import ru.wcrg.world.creatures.messages.MessageSetImpuls;
-import ru.wcrg.world.creatures.messages.MessageToAIService;
+import ru.wcrg.world.creatures.messages.*;
 import ru.wcrg.world.gameLogic.GameLogicService;
 import ru.wcrg.world.gameLogic.messages.MessageAttack;
 
@@ -24,8 +21,8 @@ public class NPC extends Animal {
         super(name, x, y, z, fraction, gameWorld, messageSystem);
         this.spawner = spawner;
 
-        MessageToAIService messageToAIService = new MessageRegisterNPC(getAddress(), messageSystem.getAddressService().getAIServiceAddress(), this);
-        messageSystem.sendMessage(messageToAIService);
+        MessageFindControllerForNPC messageToBalancer = new MessageFindControllerForNPC(getAddress(), messageSystem.getAddressService().getAIBalancerAddress(), this);
+        messageSystem.sendMessage(messageToBalancer);
     }
 
     public void gameTick(GameLogicService gameLogic) {

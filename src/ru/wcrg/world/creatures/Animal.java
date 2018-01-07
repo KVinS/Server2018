@@ -8,6 +8,7 @@ import ru.wcrg.utility.GTimer;
 import ru.wcrg.world.GameWorld;
 import ru.wcrg.world.WorldObject;
 import ru.wcrg.world.creatures.messages.MessageGiveAward;
+import ru.wcrg.world.creatures.messages.MessageOnAnimalDie;
 import ru.wcrg.world.creatures.npc.AIService;
 import ru.wcrg.world.gameLogic.GameLogicService;
 
@@ -35,7 +36,6 @@ public class Animal extends WorldObject implements Abonent {
         maxHp = 100;
         hp = maxHp;
 
-        this.controller = controller;
         this.messageSystem = messageSystem;
         messageSystem.addAbonent(this);
     }
@@ -51,7 +51,7 @@ public class Animal extends WorldObject implements Abonent {
         messageSystem.removeAbonent(this);
         gameWorld.removeAnimal(this);
         if (controller != null){
-            controller.OnAnimalDied(this);
+            messageSystem.sendMessage(new MessageOnAnimalDie(getAddress(), controller.getAddress(), this));
         }
     }
 
@@ -133,7 +133,7 @@ public class Animal extends WorldObject implements Abonent {
         hp = maxHp;
     }
 
-    public void SetController(IAnimalController aiService) {
+    public void setController(IAnimalController aiService) {
         controller = aiService;
     }
 }

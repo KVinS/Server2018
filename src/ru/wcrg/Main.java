@@ -5,9 +5,11 @@ import ru.wcrg.service.BaseBalancer;
 import ru.wcrg.world.GameWorld;
 import ru.wcrg.world.WorldObject;
 import ru.wcrg.world.WorldZone;
+import ru.wcrg.world.creatures.npc.AIBalancer;
 import ru.wcrg.world.creatures.npc.AIService;
 import ru.wcrg.world.creatures.npc.NPC;
 import ru.wcrg.world.creatures.npc.SpawnerNPC;
+import ru.wcrg.world.gameLogic.GameLogicBalancer;
 import ru.wcrg.world.gameLogic.GameLogicService;
 
 import java.util.LinkedList;
@@ -41,7 +43,7 @@ public class Main {
         LinkedList<WorldZone> worldZones = new LinkedList<>();
         worldZones.add(new WorldZone(x, z, sizeX, sizeZ));
 
-        GameLogicService gameLogic = new GameLogicService(gameLogicBalancer, messageSystem, worldZones, gameWorld);
+        GameLogicService gameLogic = new GameLogicService(name, gameLogicBalancer, messageSystem, worldZones, gameWorld);
         final Thread gameLogicThread = new Thread(gameLogic);
         gameLogicThread.setName(name);
         gameLogicThread.setDaemon(true);
@@ -49,14 +51,14 @@ public class Main {
     }
 
     private static void createAIService(MessageSystem messageSystem){
-        final Thread aiService = new Thread(new AIService(createAIBalancer(messageSystem), messageSystem));
-        aiService.setName("AI"+0);
+        final Thread aiService = new Thread(new AIService("AI0", createAIBalancer(messageSystem), messageSystem));
+        aiService.setName("AI0");
         aiService.setDaemon(true);
         aiService.start();
     }
 
     private static BaseBalancer createAIBalancer(MessageSystem messageSystem){
-        BaseBalancer aiBalancer = new BaseBalancer(messageSystem);
+        BaseBalancer aiBalancer = new AIBalancer(messageSystem);
         final Thread aiBalancerThread = new Thread(aiBalancer);
         aiBalancerThread.setName("AIB");
         aiBalancerThread.setDaemon(true);
@@ -65,7 +67,7 @@ public class Main {
     }
 
     private static BaseBalancer createGameLogicBalancer(MessageSystem messageSystem){
-        BaseBalancer gameLogicBalancer = new BaseBalancer(messageSystem);
+        BaseBalancer gameLogicBalancer = new GameLogicBalancer(messageSystem);
         final Thread gameLogicBalancerThread = new Thread(gameLogicBalancer);
         gameLogicBalancerThread.setName("GLB");
         gameLogicBalancerThread.setDaemon(true);

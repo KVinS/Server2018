@@ -14,11 +14,13 @@ import javax.xml.ws.Service;
  * Created by Эдуард on 04.01.2018.
  */
 public abstract class BaseService implements Abonent, Runnable {
+    protected String name;
     protected final BaseBalancer balancer;
     protected final Address address = new Address();
     protected final MessageSystem messageSystem;
 
-    public BaseService(BaseBalancer balancer, MessageSystem messageSystem){
+    public BaseService(String name, BaseBalancer balancer, MessageSystem messageSystem){
+        this.name = name;
         this.balancer = balancer;
         this.messageSystem = messageSystem;
         balancer.add(this);
@@ -63,5 +65,14 @@ public abstract class BaseService implements Abonent, Runnable {
     @Override
     public Address getAddress() {
         return address;
+    }
+
+    public void setName(String newName){
+        name = newName;
+    }
+
+    @Override
+    public String toString(){
+        return name;
     }
 }

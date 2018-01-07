@@ -5,15 +5,14 @@ import ru.wcrg.ThreadSettings;
 import ru.wcrg.messaging.Abonent;
 import ru.wcrg.messaging.Address;
 import ru.wcrg.messaging.MessageSystem;
+import ru.wcrg.world.creatures.npc.NPC;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by Эдуард on 05.01.2018.
  */
-public class BaseBalancer implements Abonent, Runnable {
+public abstract class BaseBalancer implements Abonent, Runnable {
     protected final Address address = new Address();
     protected final MessageSystem messageSystem;
     protected final HashMap<BaseService, Long> servicesDuration;
@@ -34,6 +33,7 @@ public class BaseBalancer implements Abonent, Runnable {
         }
 
         while (true) {
+            Queue<BaseService> queueToDivide = new LinkedList<>();
             messageSystem.execForAbonent(this);
 
             for(Map.Entry<BaseService, Long> entry : servicesDuration.entrySet()) {
@@ -41,9 +41,14 @@ public class BaseBalancer implements Abonent, Runnable {
                 Logger.Log(entry.getKey() +" average: " +average, 50);
                 if (average > ThreadSettings.SERVICE_SLEEP_TIME){
                     BaseService service = entry.getKey();
-                    Logger.LogError("Need new service for " + service);
+                    queueToDivide.add(service);
+                }
+                if (average < ThreadSettings.SERVICE_SLEEP_TIME / 4){
+                    //TODO: Удаление?
                 }
             }
+
+            queueToDivide.forEach(this::divideLoad);
 
             try {
                 Thread.sleep(ThreadSettings.BALANCER_SLEEP_TIME);
@@ -64,11 +69,24 @@ public class BaseBalancer implements Abonent, Runnable {
         servicesDuration.put(baseService, newAverage);
     }
 
+    protected abstract void divideLoad(BaseService baseService);
+
     public void add(BaseService baseService){
         servicesDuration.put(baseService, 0L);
     }
 
     public void remove(BaseService baseService){
         servicesDuration.remove(baseService);
+    }
+
+    protected BaseService getRandomService(){
+        Random generator = new Random();
+        Object[] entries = servicesDuration.keySet().toArray();
+        return (BaseService) entries[generator.nextInt(entries.length)];
+    }
+
+    protected BaseService getLowestService(){
+        //servicesDuration.entrySet().stream().min(e -> e.getValue());
+        return getRandomService();
     }
 }

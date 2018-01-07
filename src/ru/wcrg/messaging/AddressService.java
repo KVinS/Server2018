@@ -1,6 +1,7 @@
 package ru.wcrg.messaging;
 
 
+import ru.wcrg.world.creatures.npc.AIBalancer;
 import ru.wcrg.world.creatures.npc.AIService;
 
 import java.util.ArrayList;
@@ -9,14 +10,14 @@ import java.util.List;
 
 public final class AddressService {
     private List<Address> gameLogicServicesList = new ArrayList<>();
-    private List<Address> AIServicesList = new ArrayList<>();
+    private Address aiBalancer;
 
-    public void registerAIServices(AIService aiService) {
-        AIServicesList.add(aiService.getAddress());
+    public void registerAIBalancer(AIBalancer aiBalancer) {
+        this.aiBalancer = aiBalancer.getAddress();
     }
 
-    public synchronized Address getAIServiceAddress() {
-        return AIServicesList.get(0);
+    public synchronized Address getAIBalancerAddress() {
+        return aiBalancer;
     }
 
     /*private AtomicInteger accountServiceCounter = new AtomicInteger();
