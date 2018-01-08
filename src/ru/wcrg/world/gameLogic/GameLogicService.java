@@ -13,6 +13,7 @@ import ru.wcrg.world.WorldZone;
 import ru.wcrg.world.creatures.Animal;
 
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -32,7 +33,7 @@ public class GameLogicService extends BaseService {
 
     @Override
     public GameLogicService clone(){
-        return new GameLogicService("Clone " + name, balancer, messageSystem, null, gameWorld);
+        return new GameLogicService("Clone " + name, balancer, messageSystem, new LinkedList<>(), gameWorld);
     }
 
     @Override
@@ -69,6 +70,10 @@ public class GameLogicService extends BaseService {
 
     public void setZones(List<WorldZone> newZones) {
         this.worldZones = newZones;
+    }
+
+    public void addZones(List<WorldZone> newZones) {
+        this.worldZones.addAll(newZones);
     }
 
     public List<WorldZone> getZones() {

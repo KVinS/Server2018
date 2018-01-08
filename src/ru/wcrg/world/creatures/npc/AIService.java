@@ -47,6 +47,10 @@ public class AIService extends BaseService implements IAnimalController {
         this.npcs = npcs;
     }
 
+    public void addNPC(List<NPC> npcs) {
+        this.npcs.addAll(npcs);
+    }
+
     public List<NPC> getNPC() {
         return this.npcs;
     }

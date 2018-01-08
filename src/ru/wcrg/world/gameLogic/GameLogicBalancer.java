@@ -6,11 +6,13 @@ import ru.wcrg.service.BaseBalancer;
 import ru.wcrg.service.BaseService;
 import ru.wcrg.service.messages.MessageStopService;
 import ru.wcrg.world.WorldZone;
-import ru.wcrg.world.gameLogic.messages.MessageUpdateZone;
+import ru.wcrg.world.gameLogic.messages.MessageAddZones;
+import ru.wcrg.world.gameLogic.messages.MessageUpdateZones;
 
 import java.util.Deque;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 /**
  * Created by Эдуард on 07.01.2018.
@@ -31,14 +33,14 @@ public class GameLogicBalancer extends BaseBalancer {
             LinkedList<WorldZone> zonesForNewService = new LinkedList<>();
             zonesForNewService.addAll(service1.getZones());
             zonesForNewService.addAll(service2.getZones());
-            messageSystem.sendMessage(new MessageUpdateZone(getAddress(), service1.getAddress(), zonesForNewService));
+            messageSystem.sendMessage(new MessageUpdateZones(getAddress(), service1.getAddress(), zonesForNewService));
             messageSystem.sendMessage(new MessageStopService(getAddress(), service2.getAddress()));
             remove(service2);
         }
     }
 
     @Override
-    protected void divideLoad(BaseService baseService) {
+    protected void divideLoad(BaseService baseService, Queue<BaseService> lowestServices) {
         GameLogicService oldLogic = (GameLogicService) baseService;
         List<WorldZone> zones = oldLogic.getZones();
 
@@ -64,16 +66,22 @@ public class GameLogicBalancer extends BaseBalancer {
         }
 
         servicesDuration.put(baseService, 0L);
-        messageSystem.sendMessage(new MessageUpdateZone(getAddress(), oldLogic.getAddress(), zonesForOldService));
+        messageSystem.sendMessage(new MessageUpdateZones(getAddress(), oldLogic.getAddress(), zonesForOldService));
 
-        GameLogicService newLogic = oldLogic.clone();
-        newLogic.setZones(zonesForNewService);
-        newLogic.setName("GLC"+divideCounter);
+        GameLogicService newLogic;
+        if (lowestServices != null && lowestServices.size() > 0) {
+            newLogic = (GameLogicService) lowestServices.remove();
+            Logger.Log("Часть нагрузки перенесена с " + oldLogic + " на " + newLogic, 45);
+        } else {
+            newLogic = oldLogic.clone();
+            newLogic.setName("GLC"+divideCounter);
+            final Thread gameLogicThread = new Thread(newLogic);
+            gameLogicThread.setName("GLC"+divideCounter++);
+            gameLogicThread.setDaemon(true);
+            gameLogicThread.start();
+            Logger.Log("Создан новый сервис GL для переноса нагрузки с " + oldLogic, 45);
+        }
 
-        final Thread gameLogicThread = new Thread(newLogic);
-        gameLogicThread.setName("GLC"+divideCounter++);
-        gameLogicThread.setDaemon(true);
-        gameLogicThread.start();
-        Logger.Log("Создан новый сервис LG", 45);
+        messageSystem.sendMessage(new MessageAddZones(getAddress(), newLogic.getAddress(), zonesForNewService));
     }
 }

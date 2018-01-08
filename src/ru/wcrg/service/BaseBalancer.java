@@ -51,13 +51,14 @@ public abstract class BaseBalancer implements Abonent, Runnable {
                 }
             }
 
-            //TODO: Добавить забор сервисов из queueToOptimization
-            queueToDivide.forEach(this::divideLoad);
-
             if (queueToOptimization.size() > 1){
+                if (queueToDivide.size() > 0) {
+                    queueToDivide.forEach(s -> divideLoad(s, queueToOptimization));
+                }
                 optimizeLoad(queueToOptimization);
+            } else {
+                queueToDivide.forEach(s -> divideLoad(s, null));
             }
-
 
             try {
                 Thread.sleep(sleepTime);
@@ -78,8 +79,8 @@ public abstract class BaseBalancer implements Abonent, Runnable {
         servicesDuration.put(baseService, newAverage);
     }
 
-    protected abstract void optimizeLoad(Deque<BaseService> baseService);
-    protected abstract void divideLoad(BaseService baseService);
+    protected abstract void optimizeLoad(Deque<BaseService> lowestServices);
+    protected abstract void divideLoad(BaseService baseService, Queue<BaseService> lowestServices);
 
     public void add(BaseService baseService){
         servicesDuration.put(baseService, 0L);

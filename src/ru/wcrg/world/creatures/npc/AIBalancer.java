@@ -6,12 +6,9 @@ import ru.wcrg.messaging.MessageSystem;
 import ru.wcrg.service.BaseBalancer;
 import ru.wcrg.service.BaseService;
 import ru.wcrg.service.messages.MessageStopService;
-import ru.wcrg.world.WorldZone;
-import ru.wcrg.world.creatures.messages.MessageFindControllerForNPC;
+import ru.wcrg.world.creatures.messages.MessageAddNPC;
 import ru.wcrg.world.creatures.messages.MessageRegisterNPC;
 import ru.wcrg.world.creatures.messages.MessageUpdateNPC;
-import ru.wcrg.world.gameLogic.GameLogicService;
-import ru.wcrg.world.gameLogic.messages.MessageUpdateZone;
 
 import java.util.Deque;
 import java.util.LinkedList;
@@ -48,7 +45,7 @@ public class AIBalancer extends BaseBalancer {
 
 
     @Override
-    protected void divideLoad(BaseService baseService) {
+    protected void divideLoad(BaseService baseService, Queue<BaseService> lowestServices) {
         AIService oldLogic = (AIService) baseService;
         List<NPC> npcs = oldLogic.getNPC();
 
@@ -68,15 +65,21 @@ public class AIBalancer extends BaseBalancer {
         servicesDuration.put(baseService, 0L);
         messageSystem.sendMessage(new MessageUpdateNPC(getAddress(), oldLogic.getAddress(), npcsForOldService));
 
-        AIService newLogic = oldLogic.clone();
-        newLogic.setNPC(npcsForNewService);
-        newLogic.setName("AIC"+divideCounter);
+        AIService newLogic;
+        if (lowestServices != null && lowestServices.size() > 0) {
+            newLogic = (AIService) lowestServices.remove();
+            Logger.Log("Часть нагрузки перенесена с " + oldLogic + " на " + newLogic, 45);
+        } else {
+            newLogic = oldLogic.clone();
+            newLogic.setName("AIC"+divideCounter);
+            final Thread aiThread = new Thread(newLogic);
+            aiThread.setName("AIC"+divideCounter++);
+            aiThread.setDaemon(true);
+            aiThread.start();
+            Logger.Log("Создан новый сервис AI для переноса нагрузки с " + oldLogic, 45);
+        }
 
-        final Thread aiThread = new Thread(newLogic);
-        aiThread.setName("AIC"+divideCounter++);
-        aiThread.setDaemon(true);
-        aiThread.start();
-        Logger.Log("Создан новый сервис AI", 45);
+        messageSystem.sendMessage(new MessageAddNPC(getAddress(), oldLogic.getAddress(), npcsForNewService));
     }
 
     public void findControllerForNPC(NPC npc) {
