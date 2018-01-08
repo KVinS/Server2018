@@ -29,7 +29,7 @@ public class GameLogicBalancer extends BaseBalancer {
         while (services.size() >= 2) {
             GameLogicService service1 = (GameLogicService) services.removeFirst();
             GameLogicService service2 = (GameLogicService) services.removeLast();
-            
+
             messageSystem.sendMessage(new MessageAddZones(getAddress(), service1.getAddress(), service2.getZones()));
             messageSystem.sendMessage(new MessageStopService(getAddress(), service2.getAddress()));
             remove(service2);
