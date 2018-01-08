@@ -2,15 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1c720b85-752c-4aa9-bd38-41c8ce11a959" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ru/wcrg/world/creatures/messages/MessageAddNPC.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ru/wcrg/world/gameLogic/messages/MessageAddZones.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/ru/wcrg/world/gameLogic/messages/MessageUpdateZone.java" afterPath="$PROJECT_DIR$/src/ru/wcrg/world/gameLogic/messages/MessageUpdateZones.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ru/wcrg/service/BaseBalancer.java" afterPath="$PROJECT_DIR$/src/ru/wcrg/service/BaseBalancer.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ru/wcrg/world/creatures/npc/AIBalancer.java" afterPath="$PROJECT_DIR$/src/ru/wcrg/world/creatures/npc/AIBalancer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ru/wcrg/world/creatures/npc/AIService.java" afterPath="$PROJECT_DIR$/src/ru/wcrg/world/creatures/npc/AIService.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ru/wcrg/world/gameLogic/GameLogicBalancer.java" afterPath="$PROJECT_DIR$/src/ru/wcrg/world/gameLogic/GameLogicBalancer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ru/wcrg/world/gameLogic/GameLogicService.java" afterPath="$PROJECT_DIR$/src/ru/wcrg/world/gameLogic/GameLogicService.java" />
     </list>
     <ignored path="server.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -68,7 +61,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AIService.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="AIService.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ru/wcrg/world/creatures/npc/AIService.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="275">
@@ -102,8 +95,8 @@
       <file leaf-file-name="AIBalancer.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ru/wcrg/world/creatures/npc/AIBalancer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="247">
-              <caret line="81" column="39" selection-start-line="81" selection-start-column="39" selection-end-line="81" selection-end-column="39" />
+            <state relative-caret-position="230">
+              <caret line="35" column="0" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -134,11 +127,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GameLogicBalancer.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="GameLogicBalancer.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/ru/wcrg/world/gameLogic/GameLogicBalancer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="258">
-              <caret line="84" column="38" selection-start-line="84" selection-start-column="38" selection-end-line="84" selection-end-column="38" />
+            <state relative-caret-position="190">
+              <caret line="31" column="4" selection-start-line="31" selection-start-column="4" selection-end-line="31" selection-end-column="4" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -239,12 +232,12 @@
         <option value="$PROJECT_DIR$/src/ru/wcrg/service/BaseBalancer.java" />
         <option value="$PROJECT_DIR$/src/ru/wcrg/world/gameLogic/messages/MessageAddZone.java" />
         <option value="$PROJECT_DIR$/src/ru/wcrg/world/creatures/messages/MessageAddNPC.java" />
-        <option value="$PROJECT_DIR$/src/ru/wcrg/world/gameLogic/GameLogicBalancer.java" />
-        <option value="$PROJECT_DIR$/src/ru/wcrg/world/creatures/npc/AIBalancer.java" />
         <option value="$PROJECT_DIR$/src/ru/wcrg/world/gameLogic/messages/MessageAddZones.java" />
         <option value="$PROJECT_DIR$/src/ru/wcrg/world/gameLogic/GameLogicService.java" />
         <option value="$PROJECT_DIR$/src/ru/wcrg/service/BaseService.java" />
         <option value="$PROJECT_DIR$/src/ru/wcrg/world/creatures/npc/AIService.java" />
+        <option value="$PROJECT_DIR$/src/ru/wcrg/world/creatures/npc/AIBalancer.java" />
+        <option value="$PROJECT_DIR$/src/ru/wcrg/world/gameLogic/GameLogicBalancer.java" />
       </list>
     </option>
   </component>
@@ -1043,16 +1036,16 @@
       <workItem from="1514380723816" duration="18174000" />
       <workItem from="1514419053768" duration="9727000" />
       <workItem from="1515110616126" duration="11226000" />
-      <workItem from="1515177565334" duration="24024000" />
+      <workItem from="1515177565334" duration="24286000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="63151000" />
+    <option name="totallyTimeSpent" value="63413000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1066,7 +1059,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2306003" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2284041" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32980332" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3280757" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1535,26 +1528,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ru/wcrg/world/gameLogic/GameLogicBalancer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="258">
-          <caret line="84" column="38" selection-start-line="84" selection-start-column="38" selection-end-line="84" selection-end-column="38" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ru/wcrg/world/creatures/npc/AIBalancer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="247">
-          <caret line="81" column="39" selection-start-line="81" selection-start-column="39" selection-end-line="81" selection-end-column="39" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/ru/wcrg/world/gameLogic/messages/MessageAddZones.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
@@ -1609,6 +1582,26 @@
             <element signature="e#797#798#0" expanded="true" />
             <element signature="e#1288#1289#0" expanded="true" />
             <element signature="e#1326#1327#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ru/wcrg/world/creatures/npc/AIBalancer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="230">
+          <caret line="35" column="0" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ru/wcrg/world/gameLogic/GameLogicBalancer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="31" column="4" selection-start-line="31" selection-start-column="4" selection-end-line="31" selection-end-column="4" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>

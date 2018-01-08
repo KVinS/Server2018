@@ -34,10 +34,7 @@ public class AIBalancer extends BaseBalancer {
             AIService service1 = (AIService) services.removeFirst();
             AIService service2 = (AIService) services.removeLast();
 
-            LinkedList<NPC> newNPC = new LinkedList<>();
-            newNPC.addAll(service1.getNPC());
-            newNPC.addAll(service2.getNPC());
-            messageSystem.sendMessage(new MessageUpdateNPC(getAddress(), service1.getAddress(), newNPC));
+            messageSystem.sendMessage(new MessageUpdateNPC(getAddress(), service1.getAddress(), service2.getNPC()));
             messageSystem.sendMessage(new MessageStopService(getAddress(), service2.getAddress()));
             remove(service2);
         }
