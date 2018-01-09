@@ -9,10 +9,8 @@ import ru.wcrg.service.BaseService;
  * Created by Эдуард on 08.01.2018.
  */
 public class FrontendService extends BaseService {
-    public FrontendService(String name, BaseBalancer balancer, MessageSystem messageSystem) {
-        super(name, balancer, messageSystem);
-
-        int port = 8080;
+    static void RunServer(){
+        int port = 4444;
         FrontendServer frontendServer = new FrontendServer(port);
         try {
             frontendServer.run();
@@ -20,6 +18,15 @@ public class FrontendService extends BaseService {
             e.printStackTrace();
             Logger.LogError(e.toString());
         }
+    }
+
+    public static void main(String[] args) throws Exception {
+        RunServer();
+    }
+
+    public FrontendService(String name, BaseBalancer balancer, MessageSystem messageSystem) {
+        super(name, balancer, messageSystem);
+
     }
 
     @Override
