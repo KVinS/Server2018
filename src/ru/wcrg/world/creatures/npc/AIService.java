@@ -7,6 +7,7 @@ import ru.wcrg.service.BaseBalancer;
 import ru.wcrg.service.BaseService;
 import ru.wcrg.world.creatures.Animal;
 import ru.wcrg.world.creatures.IAnimalController;
+import ru.wcrg.world.creatures.messages.MessageAddNPC;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -51,7 +52,30 @@ public class AIService extends BaseService implements IAnimalController {
         this.npcs.addAll(npcs);
     }
 
-    public List<NPC> getNPC() {
-        return this.npcs;
+    @Override
+    public void stop(Address inheritor){
+        super.stop(inheritor);
+        if (inheritor != null){
+            messageSystem.sendMessage(new MessageAddNPC(address, inheritor, npcs));
+        }
+    }
+
+    @Override
+    public void divideLoadTo(Address helper) {
+        LinkedList<NPC> npcsForOldService = new LinkedList<>();
+        LinkedList<NPC> npcsForNewService = new LinkedList<>();
+
+        int num = 1;
+        for (NPC npc : npcs) {
+            if (num % 2 == 0) {
+                npcsForOldService.add(npc);
+            } else {
+                npcsForNewService.add(npc);
+            }
+            num++;
+        }
+
+        setNPC(npcsForOldService);
+        messageSystem.sendMessage(new MessageAddNPC(address, helper, npcsForNewService));
     }
 }

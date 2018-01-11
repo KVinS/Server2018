@@ -11,6 +11,8 @@ import ru.wcrg.world.GameWorld;
 import ru.wcrg.world.InteractiveWorldObject;
 import ru.wcrg.world.WorldZone;
 import ru.wcrg.world.creatures.Animal;
+import ru.wcrg.world.creatures.messages.MessageAddNPC;
+import ru.wcrg.world.gameLogic.messages.MessageAddZones;
 
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -76,7 +78,38 @@ public class GameLogicService extends BaseService {
         this.worldZones.addAll(newZones);
     }
 
-    public List<WorldZone> getZones() {
-        return this.worldZones;
+    @Override
+    public void stop(Address inheritor){
+        super.stop(inheritor);
+        if (inheritor != null){
+            messageSystem.sendMessage(new MessageAddZones(address, inheritor, worldZones));
+        }
+    }
+
+    @Override
+    public void divideLoadTo(Address helper) {
+        LinkedList<WorldZone> zonesForOldService = new LinkedList<>();
+        LinkedList<WorldZone> zonesForNewService = new LinkedList<>();
+
+        if (worldZones.size() > 1){
+            int num = 1;
+            for (WorldZone zone : worldZones) {
+                if (num % 2 == 0) {
+                    zonesForOldService.add(zone);
+                } else {
+                    zonesForNewService.add(zone);
+                }
+                num++;
+            }
+        } else if (worldZones.size() == 1){
+            WorldZone[] newZones = worldZones.get(0).divide();
+            zonesForOldService.add(newZones[0]);
+            zonesForNewService.add(newZones[1]);
+        } else {
+            Logger.LogError("Error divide load " + this);
+        }
+
+        setZones(zonesForOldService);
+        messageSystem.sendMessage(new MessageAddZones(address, helper, zonesForNewService));
     }
 }

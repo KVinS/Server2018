@@ -1,6 +1,7 @@
 package ru.wcrg.network;
 
 import ru.wcrg.Logger;
+import ru.wcrg.messaging.Address;
 import ru.wcrg.messaging.MessageSystem;
 import ru.wcrg.service.BaseBalancer;
 import ru.wcrg.service.BaseService;
@@ -31,6 +32,11 @@ public class FrontendService extends BaseService {
 
     @Override
     protected void ServiceWork() {
+
+    }
+
+    @Override
+    public void divideLoadTo(Address helper) {
 
     }
 }

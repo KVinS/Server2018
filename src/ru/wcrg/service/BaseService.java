@@ -38,6 +38,7 @@ public abstract class BaseService implements Abonent, Runnable {
 
             messageSystem.execForAbonent(this);
 
+            if (!run) break;
             ServiceWork();
 
             long currentTime = System.currentTimeMillis();
@@ -61,7 +62,7 @@ public abstract class BaseService implements Abonent, Runnable {
         Logger.Log(this + " stopped ", 45);
     }
 
-    public void stop() {
+    public void stop(Address inheritor) {
         run = false;
     }
 
@@ -83,4 +84,5 @@ public abstract class BaseService implements Abonent, Runnable {
         return name;
     }
 
+    public abstract void divideLoadTo(Address helper);
 }
