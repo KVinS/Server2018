@@ -30,7 +30,7 @@ public class NPC extends Animal {
     }
 
     public void AI(){
-        Iterator<Animal> animalsIterator = gameWorld.getAnimals(x-50, z-50, x+50, z+50);
+        Iterator<Animal> animalsIterator = gameWorld.getAnimals(x-10, z-10, x+10, z+10);
         while (animalsIterator.hasNext()) {
             Animal animal = animalsIterator.next();
             if (animal.isLife() && animal.getFraction() != getFraction()) {

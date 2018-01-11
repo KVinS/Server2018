@@ -2,17 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1c720b85-752c-4aa9-bd38-41c8ce11a959" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ru/wcrg/service/messages/MessageDivideService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/server/ru/wcrg/world/creatures/npc/AIService.class" afterPath="$PROJECT_DIR$/out/production/server/ru/wcrg/world/creatures/npc/AIService.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/server/ru/wcrg/world/gameLogic/GameLogicService.class" afterPath="$PROJECT_DIR$/out/production/server/ru/wcrg/world/gameLogic/GameLogicService.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ru/wcrg/network/FrontendService.java" afterPath="$PROJECT_DIR$/src/ru/wcrg/network/FrontendService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ru/wcrg/service/BaseService.java" afterPath="$PROJECT_DIR$/src/ru/wcrg/service/BaseService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ru/wcrg/service/messages/MessageStopService.java" afterPath="$PROJECT_DIR$/src/ru/wcrg/service/messages/MessageStopService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ru/wcrg/world/creatures/npc/AIBalancer.java" afterPath="$PROJECT_DIR$/src/ru/wcrg/world/creatures/npc/AIBalancer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ru/wcrg/world/creatures/npc/AIService.java" afterPath="$PROJECT_DIR$/src/ru/wcrg/world/creatures/npc/AIService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ru/wcrg/world/gameLogic/GameLogicBalancer.java" afterPath="$PROJECT_DIR$/src/ru/wcrg/world/gameLogic/GameLogicBalancer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ru/wcrg/world/gameLogic/GameLogicService.java" afterPath="$PROJECT_DIR$/src/ru/wcrg/world/gameLogic/GameLogicService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ru/wcrg/world/creatures/npc/NPC.java" afterPath="$PROJECT_DIR$/src/ru/wcrg/world/creatures/npc/NPC.java" />
     </list>
     <ignored path="server.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -45,8 +35,8 @@
       <file leaf-file-name="AIService.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ru/wcrg/world/creatures/npc/AIService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="521">
-              <caret line="78" column="86" selection-start-line="78" selection-start-column="86" selection-end-line="78" selection-end-column="86" />
+            <state relative-caret-position="62">
+              <caret line="33" column="59" selection-start-line="33" selection-start-column="59" selection-end-line="33" selection-end-column="59" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -112,16 +102,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MessageStopService.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ru/wcrg/service/messages/MessageStopService.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="GameLogicService.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ru/wcrg/world/gameLogic/GameLogicService.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -132,11 +112,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BaseService.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="BaseService.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ru/wcrg/service/BaseService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="310">
-              <caret line="51" column="24" selection-start-line="51" selection-start-column="24" selection-end-line="51" selection-end-column="24" />
+            <state relative-caret-position="208">
+              <caret line="45" column="21" selection-start-line="45" selection-start-column="21" selection-end-line="45" selection-end-column="21" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -144,11 +124,23 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="NPC.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="BaseBalancer.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ru/wcrg/service/BaseBalancer.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="28">
+              <caret line="82" column="97" selection-start-line="82" selection-start-column="83" selection-end-line="82" selection-end-column="97" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="NPC.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/ru/wcrg/world/creatures/npc/NPC.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="114">
-              <caret line="19" column="11" selection-start-line="19" selection-start-column="11" selection-end-line="19" selection-end-column="11" />
+            <state relative-caret-position="137">
+              <caret line="32" column="85" selection-start-line="32" selection-start-column="85" selection-end-line="32" selection-end-column="85" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -202,7 +194,6 @@
         <option value="$PROJECT_DIR$/src/ru/wcrg/world/creatures/Animal.java" />
         <option value="$PROJECT_DIR$/src/ru/wcrg/messaging/AddressService.java" />
         <option value="$PROJECT_DIR$/src/ru/wcrg/world/creatures/messages/MessageToAIBalancer.java" />
-        <option value="$PROJECT_DIR$/src/ru/wcrg/world/creatures/npc/NPC.java" />
         <option value="$PROJECT_DIR$/src/ru/wcrg/world/creatures/messages/MessageFindControllerForNPC.java" />
         <option value="$PROJECT_DIR$/src/ru/wcrg/Main.java" />
         <option value="$PROJECT_DIR$/src/ru/wcrg/ThreadSettings.java" />
@@ -228,6 +219,7 @@
         <option value="$PROJECT_DIR$/src/ru/wcrg/world/creatures/npc/AIBalancer.java" />
         <option value="$PROJECT_DIR$/src/ru/wcrg/world/creatures/npc/AIService.java" />
         <option value="$PROJECT_DIR$/src/ru/wcrg/network/FrontendService.java" />
+        <option value="$PROJECT_DIR$/src/ru/wcrg/world/creatures/npc/NPC.java" />
       </list>
     </option>
   </component>
@@ -1150,16 +1142,16 @@
       <workItem from="1514419053768" duration="9727000" />
       <workItem from="1515110616126" duration="11226000" />
       <workItem from="1515177565334" duration="37672000" />
-      <workItem from="1515710213877" duration="1957000" />
+      <workItem from="1515710213877" duration="2143000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="78756000" />
+    <option name="totallyTimeSpent" value="78942000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="0" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1582,16 +1574,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ru/wcrg/service/BaseBalancer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="232">
-          <caret line="82" column="97" selection-start-line="82" selection-start-column="83" selection-end-line="82" selection-end-column="97" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/ru/wcrg/service/messages/MessageToService.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
@@ -1638,26 +1620,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ru/wcrg/world/creatures/npc/NPC.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="19" column="11" selection-start-line="19" selection-start-column="11" selection-end-line="19" selection-end-column="11" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ru/wcrg/world/creatures/npc/AIService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="521">
-          <caret line="78" column="86" selection-start-line="78" selection-start-column="86" selection-end-line="78" selection-end-column="86" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/ru/wcrg/world/gameLogic/messages/MessageUpdateZones.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
@@ -1684,10 +1646,40 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/ru/wcrg/service/BaseBalancer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="28">
+          <caret line="82" column="97" selection-start-line="82" selection-start-column="83" selection-end-line="82" selection-end-column="97" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/ru/wcrg/service/BaseService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="310">
-          <caret line="51" column="24" selection-start-line="51" selection-start-column="24" selection-end-line="51" selection-end-column="24" />
+        <state relative-caret-position="208">
+          <caret line="45" column="21" selection-start-line="45" selection-start-column="21" selection-end-line="45" selection-end-column="21" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ru/wcrg/world/creatures/npc/AIService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="62">
+          <caret line="33" column="59" selection-start-line="33" selection-start-column="59" selection-end-line="33" selection-end-column="59" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ru/wcrg/world/creatures/npc/NPC.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="137">
+          <caret line="32" column="85" selection-start-line="32" selection-start-column="85" selection-end-line="32" selection-end-column="85" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
